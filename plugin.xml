@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<plugin id="org.datanucleus.cache" name="DataNucleus Cache Plugin" provider-name="DataNucleus">
+    <extension point="org.datanucleus.cache_level2">
+        <cache name="EHCache" class-name="org.datanucleus.cache.ehcache.EhcacheLevel2Cache"/>
+        <cache name="EHCacheClassBased" class-name="org.datanucleus.cache.ehcache.EhcacheClassBasedLevel2Cache"/>
+        <cache name="OSCache" class-name="org.datanucleus.cache.oscache.OSCacheLevel2Cache"/>
+        <cache name="SwarmCache" class-name="org.datanucleus.cache.swarmcache.SwarmCacheLevel2Cache"/>
+        <cache name="Coherence" class-name="org.datanucleus.cache.coherence.CoherenceLevel2Cache"/>
+        <cache name="jcache" class-name="org.datanucleus.cache.jcache.JCacheLevel2Cache"/>
+        <cache name="spymemcached" class-name="org.datanucleus.cache.spymemcached.SpymemcachedLevel2Cache"/>
+        <cache name="xmemcached" class-name="org.datanucleus.cache.xmemcached.XmemcachedLevel2Cache"/>
+        <cache name="cacheonix" class-name="org.datanucleus.cache.cacheonix.CacheonixLevel2Cache"/>
+    </extension>
+
+    <extension point="org.datanucleus.cache_query_result">
+        <cache name="cacheonix" class-name="org.datanucleus.cache.cacheonix.CacheonixQueryResultCache"/>
+        <cache name="jcache" class-name="org.datanucleus.cache.jcache.JCacheQueryResultCache"/>
+        <cache name="spymemcached" class-name="org.datanucleus.cache.spymemcached.SpymemcachedQueryResultCache"/>
+        <cache name="xmemcached" class-name="org.datanucleus.cache.xmemcached.XmemcachedQueryResultCache"/>
+    </extension>
+
+    <!-- PERSISTENCE PROPERTIES -->
+    <extension point="org.datanucleus.persistence_properties">
+        <persistence-property name="datanucleus.cache.level2.timeout" value="-1"
+            validator="org.datanucleus.properties.IntegerPropertyValidator"/>
+        <persistence-property name="datanucleus.cache.level2.configurationFile"/>
+        <persistence-property name="datanucleus.cache.level2.memcached.servers"/>
+        <persistence-property name="datanucleus.cache.level2.memcached.keyprefix"/>
+        <persistence-property name="datanucleus.cache.level2.memcached.expireSeconds"/>
+    </extension>
+</plugin>
