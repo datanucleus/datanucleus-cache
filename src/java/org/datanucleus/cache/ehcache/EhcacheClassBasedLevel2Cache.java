@@ -171,7 +171,7 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
      */
     private CachedPC toPC(Element object)
     {
-        return (CachedPC)object.getValue();
+        return (CachedPC)object.getObjectValue();
     }
 
     /**
