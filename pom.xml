@@ -78,6 +78,15 @@
             <version>2.4.1</version>
             <optional>true</optional>
         </dependency>
+        <!-- If not present, download this via http://www.oracle.com/technetwork/middleware/coherence/downloads/coherence-archive-165749.html
+             and install using
+            mvn install:install-file -DgroupId=com.oracle.coherence -DartifactId=coherence -Dversion=3.7.1 -Dfile=coherence.jar -Dpackaging=jar -DgeneratePom=true -->
+        <dependency>
+            <groupId>com.oracle.coherence</groupId>
+            <artifactId>coherence</artifactId>
+            <version>3.7.1</version>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
@@ -95,7 +104,6 @@
                     <excludes>
                         <exclude>cacheonix/*</exclude>
                         <exclude>cacheonix/cache/*</exclude>
-                        <exclude>com/tangosol/net/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -104,7 +112,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.7</version>
                 <configuration>
-                    <excludePackageNames>cacheonix:cacheonix.cache:com.tangosol.net</excludePackageNames>
+                    <excludePackageNames>cacheonix:cacheonix.cache</excludePackageNames>
                 </configuration>
             </plugin>
             <plugin>
@@ -117,7 +125,7 @@
                             org.datanucleus*;version="${dn.core.version}",
                             *;resolution:=optional
                         </Import-Package>
-                        <Export-Package>org.datanucleus.cache*,!cacheonix*,!com.tangosol*</Export-Package>
+                        <Export-Package>org.datanucleus.cache*,!cacheonix*</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
