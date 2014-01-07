@@ -21,6 +21,6 @@ __Javadocs__ : [3.1](http://www.datanucleus.org/javadocs/cache/3.1/), [3.0](http
 
 __Download(Releases)__ : [Maven Central](http://central.maven.org/maven2/org/datanucleus/datanucleus-cache)
 
-__Download(Nightly)__ : [Nightly Builds](http://central.maven.org/maven2/org/datanucleus/datanucleus-cache)
+__Download(Nightly)__ : [Nightly Builds](http://www.datanucleus.org/downloads/maven2-nightly/org/datanucleus/datanucleus-cache)
 
 __Dependencies__ : See file [pom.xml](pom.xml)
