@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PersistenceConfiguration;
+import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.identity.OID;
@@ -55,7 +55,7 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
     {
         super(nucleusCtx);
 
-        PersistenceConfiguration conf = nucleusCtx.getPersistenceConfiguration();
+        Configuration conf = nucleusCtx.getConfiguration();
         String configFile = conf.getStringProperty("datanucleus.cache.level2.configurationFile");
         if (configFile == null)
         {

@@ -27,7 +27,7 @@ import net.rubyeye.xmemcached.XMemcachedClientBuilder;
 import net.rubyeye.xmemcached.utils.AddrUtil;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PersistenceConfiguration;
+import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.exceptions.NucleusException;
@@ -46,7 +46,7 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
     {
         super(nucleusCtx);
 
-        PersistenceConfiguration conf = nucleusCtx.getPersistenceConfiguration();
+        Configuration conf = nucleusCtx.getConfiguration();
 
         String servers = conf.getStringProperty("datanucleus.cache.level2.memcached.servers");
         MemcachedClientBuilder builder = new XMemcachedClientBuilder(AddrUtil.getAddresses(servers));

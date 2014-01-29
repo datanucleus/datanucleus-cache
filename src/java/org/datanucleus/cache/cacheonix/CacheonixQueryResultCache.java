@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PersistenceConfiguration;
+import org.datanucleus.Configuration;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
 import org.datanucleus.store.query.cache.QueryResultsCache;
@@ -47,7 +47,7 @@ public class CacheonixQueryResultCache implements QueryResultsCache
 
     public CacheonixQueryResultCache(NucleusContext nucleusCtx)
     {
-        PersistenceConfiguration conf = nucleusCtx.getPersistenceConfiguration();
+        Configuration conf = nucleusCtx.getConfiguration();
         String configFile = conf.getStringProperty("datanucleus.cache.level2.configurationFile");
         if (configFile == null)
         {

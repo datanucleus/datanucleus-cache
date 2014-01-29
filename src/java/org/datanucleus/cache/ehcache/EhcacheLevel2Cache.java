@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PersistenceConfiguration;
+import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.exceptions.NucleusException;
@@ -58,7 +58,7 @@ public class EhcacheLevel2Cache extends AbstractLevel2Cache
     {
         super(nucleusCtx);
 
-        PersistenceConfiguration conf = nucleusCtx.getPersistenceConfiguration();
+        Configuration conf = nucleusCtx.getConfiguration();
         String configFile = conf.getStringProperty("datanucleus.cache.level2.configurationFile");
         try
         {

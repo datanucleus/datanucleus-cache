@@ -27,7 +27,7 @@ import net.rubyeye.xmemcached.XMemcachedClientBuilder;
 import net.rubyeye.xmemcached.utils.AddrUtil;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PersistenceConfiguration;
+import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
@@ -48,7 +48,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
 
     public XmemcachedQueryResultCache(NucleusContext nucleusCtx)
     {
-        PersistenceConfiguration conf = nucleusCtx.getPersistenceConfiguration();
+        Configuration conf = nucleusCtx.getConfiguration();
         String keyPrefix = conf.getStringProperty("datanucleus.cache.query.memcached.keyprefix");
         if (keyPrefix != null)
         {

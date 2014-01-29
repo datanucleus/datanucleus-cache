@@ -25,7 +25,7 @@ import net.spy.memcached.AddrUtil;
 import net.spy.memcached.MemcachedClient;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PersistenceConfiguration;
+import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
@@ -45,7 +45,7 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
 
     public SpymemcachedQueryResultCache(NucleusContext nucleusCtx)
     {
-        PersistenceConfiguration conf = nucleusCtx.getPersistenceConfiguration();
+        Configuration conf = nucleusCtx.getConfiguration();
         String keyPrefix = conf.getStringProperty("datanucleus.cache.query.memcached.keyprefix");
         String servers = conf.getStringProperty("datanucleus.cache.query.memcached.servers");
         String expireStr = conf.getStringProperty("datanucleus.cache.query.memcached.expireSeconds");
