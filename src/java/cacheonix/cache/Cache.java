@@ -8,5 +8,5 @@ public interface Cache<K extends java.io.Serializable,V extends java.io.Serializ
     String getName();
     V put(K key, V value);
     V put(K key, V value, long expirationMillis);
-    V remove(K key);
+    V remove(Object key);
 }
