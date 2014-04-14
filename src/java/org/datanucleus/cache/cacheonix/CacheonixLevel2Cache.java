@@ -48,9 +48,6 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
     /** Fallback class when we can't derive the class name from the identity (composite id). */
     Cache<Serializable, Serializable> defaultCache;
 
-    /**
-     * @param nucleusCtx
-     */
     public CacheonixLevel2Cache(NucleusContext nucleusCtx)
     {
         super(nucleusCtx);
