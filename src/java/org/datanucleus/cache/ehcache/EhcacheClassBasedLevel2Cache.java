@@ -175,9 +175,9 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
     }
 
     /**
-     * Convert from PersistenceCapable to Element
+     * Convert from persistable object to Element
      * @param oid the id
-     * @param object the PersistenceCapable
+     * @param object the persistable object
      * @return the Element
      */
     private Element toElement(Object oid, CachedPC object)
