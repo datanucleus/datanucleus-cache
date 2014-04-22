@@ -28,8 +28,6 @@ import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.identity.IdentityUtils;
-import org.datanucleus.identity.OID;
-import org.datanucleus.identity.SingleFieldId;
 import org.datanucleus.metadata.AbstractClassMetaData;
 import org.datanucleus.metadata.IdentityType;
 import org.datanucleus.util.NucleusLogger;
@@ -167,8 +165,7 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
 
     void evictAllOfClass(String className)
     {
-        AbstractClassMetaData cmd =
-            nucleusCtx.getMetaDataManager().getMetaDataForClass(className, nucleusCtx.getClassLoaderResolver(null));
+        AbstractClassMetaData cmd = nucleusCtx.getMetaDataManager().getMetaDataForClass(className, nucleusCtx.getClassLoaderResolver(null));
         Cache cache = null;
         if (cmd.usesSingleFieldIdentityClass() || cmd.getIdentityType() == IdentityType.DATASTORE)
         {
@@ -184,15 +181,15 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
                 Object key = keyIter.next();
                 if (cmd.getIdentityType() == IdentityType.APPLICATION)
                 {
-                    String targetClassName = ((SingleFieldId)key).getTargetClassName();
+                    String targetClassName = IdentityUtils.getTargetClassNameForIdentitySimple(key);
                     if (className.equals(targetClassName))
                     {
                         keyIter.remove();
                     }
                 }
-                else if (cmd.getIdentityType() == IdentityType.DATASTORE && key instanceof OID)
+                else if (cmd.getIdentityType() == IdentityType.DATASTORE)
                 {
-                    String targetClassName = ((OID)key).getTargetClassName();
+                    String targetClassName = IdentityUtils.getTargetClassNameForIdentitySimple(key);
                     if (className.equals(targetClassName))
                     {
                         keyIter.remove();
@@ -291,14 +288,9 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
 
     private Cache getCacheForId(Object id)
     {
-        if (IdentityUtils.isSingleFieldIdentity(id))
+        if (IdentityUtils.isSingleFieldIdentity(id) || IdentityUtils.isDatastoreIdentity(id))
         {
-            String targetClassName = ((SingleFieldId)id).getTargetClassName();
-            return getCacheForClass(targetClassName);
-        }
-        if (id instanceof OID)
-        {
-            return getCacheForClass(((OID) id).getTargetClassName());
+            return getCacheForClass(IdentityUtils.getTargetClassNameForIdentitySimple(id));
         }
         return defaultCache;
     }

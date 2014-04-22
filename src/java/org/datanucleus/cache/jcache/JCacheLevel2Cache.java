@@ -30,8 +30,7 @@ import org.datanucleus.NucleusContext;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.exceptions.NucleusException;
-import org.datanucleus.identity.OID;
-import org.datanucleus.identity.SingleFieldId;
+import org.datanucleus.identity.IdentityUtils;
 import org.datanucleus.metadata.AbstractClassMetaData;
 import org.datanucleus.metadata.IdentityType;
 import org.datanucleus.util.NucleusLogger;
@@ -281,15 +280,15 @@ public class JCacheLevel2Cache extends AbstractLevel2Cache
             Object key = entry.getKey();
             if (cmd.getIdentityType() == IdentityType.APPLICATION)
             {
-                String targetClassName = ((SingleFieldId)key).getTargetClassName();
+                String targetClassName = IdentityUtils.getTargetClassNameForIdentitySimple(key);
                 if (className.equals(targetClassName))
                 {
                     entryIter.remove();
                 }
             }
-            else if (cmd.getIdentityType() == IdentityType.DATASTORE && key instanceof OID)
+            else if (cmd.getIdentityType() == IdentityType.DATASTORE)
             {
-                String targetClassName = ((OID)key).getTargetClassName();
+                String targetClassName = IdentityUtils.getTargetClassNameForIdentitySimple(key);
                 if (className.equals(targetClassName))
                 {
                     entryIter.remove();
