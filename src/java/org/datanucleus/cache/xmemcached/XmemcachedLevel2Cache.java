@@ -31,6 +31,8 @@ import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.exceptions.NucleusException;
+import org.datanucleus.identity.IdentityUtils;
+import org.datanucleus.identity.SingleFieldId;
 import org.datanucleus.util.StringUtils;
 
 /**
@@ -194,9 +196,9 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
 
     protected String getCacheKeyForId(Object id)
     {
-        if (nucleusCtx.getApiAdapter().isSingleFieldIdentity(id))
+        if (IdentityUtils.isSingleFieldIdentity(id))
         {
-            String targetClassName = nucleusCtx.getApiAdapter().getTargetClassNameForSingleFieldIdentity(id);
+            String targetClassName = ((SingleFieldId)id).getTargetClassName();
             return cacheName + targetClassName + ":" + id.toString().hashCode();
         }
         else

@@ -28,7 +28,9 @@ import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.exceptions.NucleusException;
+import org.datanucleus.identity.IdentityUtils;
 import org.datanucleus.identity.OID;
+import org.datanucleus.identity.SingleFieldId;
 import org.datanucleus.metadata.AbstractClassMetaData;
 import org.datanucleus.metadata.IdentityType;
 import org.datanucleus.util.NucleusLogger;
@@ -311,7 +313,7 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
                 Object key = keyIter.next();
                 if (cmd.getIdentityType() == IdentityType.APPLICATION)
                 {
-                    String targetClassName = nucleusCtx.getApiAdapter().getTargetClassNameForSingleFieldIdentity(key);
+                    String targetClassName = ((SingleFieldId)key).getTargetClassName();
                     if (className.equals(targetClassName))
                     {
                         keyIter.remove();
@@ -319,8 +321,8 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
                 }
                 else if (cmd.getIdentityType() == IdentityType.DATASTORE && key instanceof OID)
                 {
-                    OID oid = (OID)key;
-                    if (className.equals(oid.getPcClass()))
+                    String targetClassName = ((OID)key).getTargetClassName();
+                    if (className.equals(targetClassName))
                     {
                         keyIter.remove();
                     }
@@ -402,14 +404,13 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
 
     private Cache getCacheForId(Object id)
     {
-        if (nucleusCtx.getApiAdapter().isSingleFieldIdentity(id))
+        if (IdentityUtils.isSingleFieldIdentity(id))
         {
-            String targetClassName = nucleusCtx.getApiAdapter().getTargetClassNameForSingleFieldIdentity(id);
-            return getCacheForClass(targetClassName);
+            return getCacheForClass(((SingleFieldId)id).getTargetClassName());
         }
         if (id instanceof OID)
         {
-            return getCacheForClass(((OID) id).getPcClass());
+            return getCacheForClass(((OID)id).getTargetClassName());
         }
         return defaultCache;
     }
