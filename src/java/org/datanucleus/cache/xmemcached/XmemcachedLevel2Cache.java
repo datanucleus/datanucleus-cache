@@ -196,6 +196,7 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
 
     protected String getCacheKeyForId(Object id)
     {
+        // Because single-field id doesn't include target class name in toString()
         if (IdentityUtils.isSingleFieldIdentity(id))
         {
             String targetClassName = ((SingleFieldId)id).getTargetClassName();
