@@ -46,8 +46,10 @@ import net.sf.ehcache.ObjectExistsException;
  */
 public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
 {
-    /** Localisation of messages. */
-    private static final Localiser LOCALISER_EHCACHE = Localiser.getInstance("org.datanucleus.cache.ehcache.Localisation_ehcache",EhcacheClassBasedLevel2Cache.class.getClassLoader());
+    static
+    {
+        Localiser.registerBundle("org.datanucleus.cache.ehcache.Localisation_ehcache", EhcacheClassBasedLevel2Cache.class.getClassLoader());
+    }
 
     private final CacheManager cacheManager;
 
@@ -78,7 +80,7 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
         }
         catch (CacheException e)
         {
-            throw new NucleusException(LOCALISER_EHCACHE.msg("Cache.EHCache.CacheManagerInitialiseFails", e));
+            throw new NucleusException(Localiser.msg("Cache.EHCache.CacheManagerInitialiseFails", e));
         }
 
         if (!cacheManager.cacheExists(cacheName))
@@ -90,17 +92,17 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
             catch (IllegalStateException e)
             {
                 NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
-                throw new NucleusException(LOCALISER_EHCACHE.msg("Cache.EHCache.CreateDefaultFails", e));
+                throw new NucleusException(Localiser.msg("Cache.EHCache.CreateDefaultFails", e));
             }
             catch (ObjectExistsException e)
             {
                 NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
-                throw new NucleusException(LOCALISER_EHCACHE.msg("Cache.EHCache.CreateDefaultFails", e));
+                throw new NucleusException(Localiser.msg("Cache.EHCache.CreateDefaultFails", e));
             }
             catch (CacheException e)
             {
                 NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
-                throw new NucleusException(LOCALISER_EHCACHE.msg("Cache.EHCache.CreateDefaultFails", e));
+                throw new NucleusException(Localiser.msg("Cache.EHCache.CreateDefaultFails", e));
             }
         }
         defaultCache = cacheManager.getCache(cacheName);
@@ -371,13 +373,13 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
         {
             if (NucleusLogger.CACHE.isDebugEnabled())
             {
-                NucleusLogger.CACHE.debug(LOCALISER_EHCACHE.msg("Cache.EHCache.Initialising", pcClassName));
+                NucleusLogger.CACHE.debug(Localiser.msg("Cache.EHCache.Initialising", pcClassName));
             }
             if (cacheManager.cacheExists(pcClassName))
             {
                 if (NucleusLogger.CACHE.isDebugEnabled())
                 {
-                    NucleusLogger.CACHE.debug(LOCALISER_EHCACHE.msg("Cache.EHCache.Exists", pcClassName));
+                    NucleusLogger.CACHE.debug(Localiser.msg("Cache.EHCache.Exists", pcClassName));
                 }
                 cache = cacheManager.getCache(pcClassName);
             }
@@ -387,11 +389,11 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
                 // that he either needs to define the cache for the class, or give a default                
                 if (NucleusLogger.CACHE.isDebugEnabled())
                 {
-                    NucleusLogger.CACHE.debug(LOCALISER_EHCACHE.msg("Cache.EHCache.CacheDoesntExist"));
+                    NucleusLogger.CACHE.debug(Localiser.msg("Cache.EHCache.CacheDoesntExist"));
                 }
                 if (defaultCache == null)
                 {
-                    NucleusLogger.CACHE.error(LOCALISER_EHCACHE.msg("Cache.EHCache.CacheDoestExistNoDefault", pcClassName));
+                    NucleusLogger.CACHE.error(Localiser.msg("Cache.EHCache.CacheDoestExistNoDefault", pcClassName));
                 }
                 cache = defaultCache;
             }

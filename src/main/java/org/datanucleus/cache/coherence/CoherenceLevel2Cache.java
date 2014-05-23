@@ -27,6 +27,7 @@ import org.datanucleus.NucleusContext;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
 import org.datanucleus.util.ClassUtils;
+import org.datanucleus.util.Localiser;
 import org.datanucleus.util.NucleusLogger;
 
 import com.tangosol.net.CacheFactory;
@@ -168,7 +169,7 @@ public class CoherenceLevel2Cache extends AbstractLevel2Cache
     {
         if (oid == null || pc == null)
         {
-            NucleusLogger.CACHE.warn(LOCALISER.msg("004011"));
+            NucleusLogger.CACHE.warn(Localiser.msg("004011"));
             return null;
         }
         else if (maxSize >= 0 && getSize() == maxSize)
