@@ -40,6 +40,7 @@ import org.datanucleus.util.NucleusLogger;
  */
 public class JCacheLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = -6746653492839665978L;
     /** The cache to use. */
     private final Cache cache;
 

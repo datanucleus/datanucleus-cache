@@ -46,6 +46,8 @@ import net.sf.ehcache.ObjectExistsException;
  */
 public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = 6822949161673812954L;
+
     static
     {
         Localiser.registerBundle("org.datanucleus.cache.ehcache.Localisation_ehcache", EhcacheClassBasedLevel2Cache.class.getClassLoader());

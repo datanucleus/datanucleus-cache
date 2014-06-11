@@ -37,6 +37,8 @@ import cacheonix.cache.Cache;
  */
 public class CacheonixQueryResultCache implements QueryResultsCache
 {
+    private static final long serialVersionUID = -7951373996155521704L;
+
     Cacheonix cacheManager;
 
     /** User-provided timeout for cache object expiration (milliseconds). */

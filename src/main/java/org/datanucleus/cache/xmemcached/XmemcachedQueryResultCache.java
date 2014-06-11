@@ -39,6 +39,8 @@ import org.datanucleus.util.StringUtils;
  */
 public class XmemcachedQueryResultCache implements QueryResultsCache
 {
+    private static final long serialVersionUID = 8865474095320516082L;
+
     private MemcachedClient client;
 
     /** Prefix (for uniqueness) to ensure sharing with other xmemcached objects. */

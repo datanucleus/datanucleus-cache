@@ -44,6 +44,8 @@ import net.sf.ehcache.ObjectExistsException;
  */
 public class EhcacheLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = -5693887366971993190L;
+
     /** The cache manager */
     private final CacheManager cacheManager;
 

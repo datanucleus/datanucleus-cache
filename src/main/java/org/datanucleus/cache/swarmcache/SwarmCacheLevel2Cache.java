@@ -35,6 +35,7 @@ import net.sf.swarmcache.ObjectCache;
  */
 public class SwarmCacheLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = -8430359936229487099L;
     /** The cache to use. */
     private final ObjectCache cache;
 

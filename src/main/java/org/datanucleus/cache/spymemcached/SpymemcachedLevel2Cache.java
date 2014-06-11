@@ -39,6 +39,8 @@ import org.datanucleus.identity.SingleFieldId;
  */
 public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = 6424542848352545662L;
+
     private MemcachedClient client;
 
     private int expireSeconds = 0;

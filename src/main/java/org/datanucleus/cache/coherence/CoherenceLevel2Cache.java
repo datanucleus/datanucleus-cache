@@ -41,6 +41,7 @@ import com.tangosol.net.NamedCache;
  */
 public class CoherenceLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = -8366039798215561285L;
     /** The Coherence cache */
     private NamedCache cache;
 

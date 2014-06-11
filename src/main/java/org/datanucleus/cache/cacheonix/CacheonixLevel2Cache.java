@@ -40,6 +40,8 @@ import cacheonix.cache.Cache;
  */
 public class CacheonixLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = -4980918853861817672L;
+
     Cacheonix cacheManager;
 
     /** Map of cache keyed by the class name (one cache per class). */

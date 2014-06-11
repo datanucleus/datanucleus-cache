@@ -34,6 +34,7 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
  */
 public class OSCacheLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = -2975118169574839235L;
     /** The cache manager */
     private final GeneralCacheAdministrator cache;
 

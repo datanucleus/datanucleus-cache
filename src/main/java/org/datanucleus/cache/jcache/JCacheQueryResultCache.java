@@ -39,6 +39,7 @@ import org.datanucleus.util.NucleusLogger;
  */
 public class JCacheQueryResultCache implements QueryResultsCache
 {
+    private static final long serialVersionUID = 232753962238700835L;
     /** The cache to use. */
     private Cache cache;
 

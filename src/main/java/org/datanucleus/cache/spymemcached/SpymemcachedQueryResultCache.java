@@ -36,6 +36,8 @@ import org.datanucleus.store.query.cache.QueryResultsCache;
  */
 public class SpymemcachedQueryResultCache implements QueryResultsCache
 {
+    private static final long serialVersionUID = 4242859249224130913L;
+
     private MemcachedClient client;
 
     /** Prefix (for uniqueness) to ensure sharing with other memcache objects. */

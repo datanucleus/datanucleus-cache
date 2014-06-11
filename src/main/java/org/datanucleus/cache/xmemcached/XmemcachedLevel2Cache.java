@@ -40,6 +40,8 @@ import org.datanucleus.util.StringUtils;
  */
 public class XmemcachedLevel2Cache extends AbstractLevel2Cache
 {
+    private static final long serialVersionUID = -5116427607754733694L;
+
     private MemcachedClient client;
 
     private int expireSeconds = 0;
