@@ -81,10 +81,7 @@ public class SwarmCacheLevel2Cache extends AbstractLevel2Cache
         {
             return (CachedPC)cache.get((Serializable)oid);
         }
-        else
-        {
-            throw new UnsupportedOperationException("SwarmCache doesnt support use of keys that aren't Serializable");
-        }
+        throw new UnsupportedOperationException("SwarmCache doesnt support use of keys that aren't Serializable");
     }
 
     /**

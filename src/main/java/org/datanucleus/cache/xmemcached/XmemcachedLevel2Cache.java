@@ -204,9 +204,6 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
             String targetClassName = ((SingleFieldId)id).getTargetClassName();
             return cacheName + targetClassName + ":" + id.toString().hashCode();
         }
-        else
-        {
-            return cacheName + id.toString().hashCode();
-        }
+        return cacheName + id.toString().hashCode();
     }
 }

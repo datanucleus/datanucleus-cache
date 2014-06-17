@@ -194,9 +194,6 @@ public class OSCacheLevel2Cache extends AbstractLevel2Cache
         {
             return String.valueOf(key) + '.' + cacheName;
         }
-        else
-        {
-            return String.valueOf(key);
-        }
+        return String.valueOf(key);
     }
 }

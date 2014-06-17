@@ -92,7 +92,7 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
         Object pc = get(oid);
         if (pc != null)
         {
-            getCacheForId(oid).remove((Serializable)oid);
+            getCacheForId(oid).remove(oid);
         }
     }
 
@@ -275,7 +275,7 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
 
     private Cache<Serializable, Serializable> getCacheForClass(String cacheName)
     {
-        Cache cache = (Cache) caches.get(cacheName);
+        Cache cache = caches.get(cacheName);
         if (cache == null)
         {
             cache = cacheManager.getCache(cacheName);
