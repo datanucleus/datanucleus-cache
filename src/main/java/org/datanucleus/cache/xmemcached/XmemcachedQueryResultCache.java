@@ -32,6 +32,7 @@ import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
 import org.datanucleus.store.query.cache.QueryResultsCache;
+import org.datanucleus.util.NucleusLogger;
 import org.datanucleus.util.StringUtils;
 
 /**
@@ -65,7 +66,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            NucleusLogger.CACHE.error("Exception caught creating cache", e);
             throw new NucleusException("Cant create cache", e);
         }
 
@@ -88,7 +89,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            NucleusLogger.CACHE.error("Exception caught shutting down cache", e);
         }
     }
 

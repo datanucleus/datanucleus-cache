@@ -32,6 +32,7 @@ import org.datanucleus.cache.CachedPC;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.identity.IdentityUtils;
 import org.datanucleus.identity.SingleFieldId;
+import org.datanucleus.util.NucleusLogger;
 
 /**
  * Plugin using Spymemcached implementation of "memcached" as a Level2 cache.
@@ -64,7 +65,7 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            NucleusLogger.CACHE.error("Exception caught creating cache", e);
             throw new NucleusException("Cant create cache", e);
         }
         catch (NumberFormatException ex)

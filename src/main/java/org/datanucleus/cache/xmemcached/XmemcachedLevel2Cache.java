@@ -33,6 +33,7 @@ import org.datanucleus.cache.CachedPC;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.identity.IdentityUtils;
 import org.datanucleus.identity.SingleFieldId;
+import org.datanucleus.util.NucleusLogger;
 import org.datanucleus.util.StringUtils;
 
 /**
@@ -60,7 +61,7 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            NucleusLogger.CACHE.error("Exception caught creating cache", e);
             throw new NucleusException("Cant create cache", e);
         }
 
@@ -81,7 +82,7 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
             }
             catch (Exception e)
             {
-                e.printStackTrace();
+                NucleusLogger.CACHE.error("Exception caught flushing cache", e);
             }
         }
         try
@@ -90,7 +91,7 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            NucleusLogger.CACHE.error("Exception caught shutting down cache", e);
         }
     }
 

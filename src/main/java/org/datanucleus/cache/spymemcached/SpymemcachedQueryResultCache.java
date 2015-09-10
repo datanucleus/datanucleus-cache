@@ -30,6 +30,7 @@ import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
 import org.datanucleus.store.query.cache.QueryResultsCache;
+import org.datanucleus.util.NucleusLogger;
 
 /**
  * Plugin using spymemcached implementation of "memcached" as a query results cache.
@@ -66,7 +67,7 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            NucleusLogger.CACHE.error("Exception caught creating cache", e);
             throw new NucleusException("Cant create cache", e);
         }
         catch (NumberFormatException ex)
