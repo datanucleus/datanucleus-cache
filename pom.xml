@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>datanucleus-cache</artifactId>
-    <version>4.0.5-SNAPSHOT</version>
+    <version>4.0.5</version>
 
     <name>DataNucleus Cache plugin</name>
     <description>DataNucleus third-party Caching plugin</description>
