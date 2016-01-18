@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.datanucleus</groupId>
         <artifactId>datanucleus-maven-parent</artifactId>
-        <version>4.0.5</version>
+        <version>5.0.0</version>
     </parent>
 
     <artifactId>datanucleus-cache</artifactId>
-    <version>4.0.5-SNAPSHOT</version>
+    <version>5.0.0-m1-SNAPSHOT</version>
 
     <name>DataNucleus Cache plugin</name>
     <description>DataNucleus third-party Caching plugin</description>
@@ -21,7 +21,7 @@
     </scm>
 
     <properties>
-        <dn.core.version>4.0.0-m4</dn.core.version>
+        <dn.core.version>5.0.0-m1-SNAPSHOT</dn.core.version>
     </properties>
 
     <repositories>
@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-core</artifactId>
-            <version>[${dn.core.version}, )</version>
+            <version>[${dn.core.version}, 5.9)</version>
             <scope>provided</scope>
         </dependency>
 
