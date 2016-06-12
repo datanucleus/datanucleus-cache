@@ -19,8 +19,6 @@
 
     <!-- PERSISTENCE PROPERTIES -->
     <extension point="org.datanucleus.persistence_properties">
-        <persistence-property name="datanucleus.cache.level2.timeout" value="-1"
-            validator="org.datanucleus.properties.IntegerPropertyValidator"/>
         <persistence-property name="datanucleus.cache.level2.configurationFile"/>
         <persistence-property name="datanucleus.cache.level2.memcached.servers"/>
         <persistence-property name="datanucleus.cache.level2.memcached.keyprefix"/>
