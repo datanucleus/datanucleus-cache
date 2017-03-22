@@ -308,7 +308,7 @@ public class EhcacheLevel2Cache extends AbstractLevel2Cache
             Object key = keyIter.next();
             if (cmd.getIdentityType() == IdentityType.APPLICATION)
             {
-                String targetClassName = IdentityUtils.getTargetClassNameForIdentitySimple(key);
+                String targetClassName = IdentityUtils.getTargetClassNameForIdentity(key);
                 if (className.equals(targetClassName))
                 {
                     keyIter.remove();
@@ -316,7 +316,7 @@ public class EhcacheLevel2Cache extends AbstractLevel2Cache
             }
             else if (cmd.getIdentityType() == IdentityType.DATASTORE)
             {
-                String targetClassName = IdentityUtils.getTargetClassNameForIdentitySimple(key);
+                String targetClassName = IdentityUtils.getTargetClassNameForIdentity(key);
                 if (className.equals(targetClassName))
                 {
                     keyIter.remove();
