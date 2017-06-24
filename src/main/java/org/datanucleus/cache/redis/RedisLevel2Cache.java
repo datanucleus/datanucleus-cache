@@ -53,7 +53,7 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
 
     private Pool<Jedis> pool;
 
-    int expirySeconds;
+    private int expirySeconds;
 
     private final static String DEFAULT_SERVER = "localhost";
     private final static int DEFAULT_DATABASE = 1;
@@ -70,16 +70,13 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
         int database = conf.getIntProperty("datanucleus.cache.level2.redis.database");
         database = database == 0 ? DEFAULT_DATABASE : database;
 
-        String sentinelsStr = conf.getStringProperty("datanucleus.cache.level2.redis.sentinels");
-
         int timeout = conf.getIntProperty("datanucleus.cache.level2.redis.timeout");
         timeout = timeout == 0 ? DEFAULT_TIMEOUT : timeout;
 
         expirySeconds = conf.getIntProperty("datanucleus.cache.level2.redis.expirySeconds");
         expirySeconds = expirySeconds == 0 ? DEFAULT_EXPIRY : expirySeconds;
 
-        clearAtClose = conf.getBooleanProperty("datanucleus.cache.level2.redis.clearAtClose", false);
-
+        String sentinelsStr = conf.getStringProperty("datanucleus.cache.level2.redis.sentinels");
         if (sentinelsStr != null && sentinelsStr.length() > 0)
         {
             Set<String> sentinels = new LinkedHashSet<>();
@@ -88,7 +85,7 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
         }
         else
         {
-            String server = conf.getStringProperty("datanucleus.cache.level2.redis.servers");
+            String server = conf.getStringProperty("datanucleus.cache.level2.redis.server");
             int port = conf.getIntProperty("datanucleus.cache.level2.redis.port");
 
             server = server == null ? DEFAULT_SERVER : server;
@@ -96,7 +93,6 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
 
             pool = new JedisPool(new JedisPoolConfig(), server, port, timeout, null, database);
         }
-
     }
 
     @Override

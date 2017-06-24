@@ -8,6 +8,7 @@
         <cache name="spymemcached" class-name="org.datanucleus.cache.spymemcached.SpymemcachedLevel2Cache"/>
         <cache name="xmemcached" class-name="org.datanucleus.cache.xmemcached.XmemcachedLevel2Cache"/>
         <cache name="cacheonix" class-name="org.datanucleus.cache.cacheonix.CacheonixLevel2Cache"/>
+        <cache name="redis" class-name="org.datanucleus.cache.redis.RedisLevel2Cache"/>
     </extension>
 
     <extension point="org.datanucleus.cache_query_result">
@@ -19,8 +20,16 @@
     <!-- PERSISTENCE PROPERTIES -->
     <extension point="org.datanucleus.persistence_properties">
         <persistence-property name="datanucleus.cache.level2.configurationFile"/>
+
         <persistence-property name="datanucleus.cache.level2.memcached.servers"/>
         <persistence-property name="datanucleus.cache.level2.memcached.keyprefix"/>
         <persistence-property name="datanucleus.cache.level2.memcached.expireSeconds"/>
+
+        <persistence-property name="datanucleus.cache.level2.redis.database"/>
+        <persistence-property name="datanucleus.cache.level2.redis.timeout"/>
+        <persistence-property name="datanucleus.cache.level2.redis.expirySeconds"/>
+        <persistence-property name="datanucleus.cache.level2.redis.sentinels"/>
+        <persistence-property name="datanucleus.cache.level2.redis.server"/>
+        <persistence-property name="datanucleus.cache.level2.redis.port"/>
     </extension>
 </plugin>
