@@ -23,7 +23,6 @@
 
         <persistence-property name="datanucleus.cache.level2.memcached.servers"/>
         <persistence-property name="datanucleus.cache.level2.memcached.keyprefix"/>
-        <persistence-property name="datanucleus.cache.level2.memcached.expireSeconds"/>
 
         <persistence-property name="datanucleus.cache.level2.redis.database"/>
         <persistence-property name="datanucleus.cache.level2.redis.timeout"/>

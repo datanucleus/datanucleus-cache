@@ -52,11 +52,7 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
 
         Configuration conf = nucleusCtx.getConfiguration();
 
-        String expireStr = conf.getStringProperty("datanucleus.cache.level2.memcached.expireSeconds");
-        if (expireStr != null && !"".equals(expireStr))
-        {
-            expireSeconds = Integer.parseInt(expireStr);
-        }
+        expireSeconds = (int)expiryMillis/1000;
 
         try
         {
@@ -67,10 +63,6 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
         {
             NucleusLogger.CACHE.error("Exception caught creating cache", e);
             throw new NucleusException("Cant create cache", e);
-        }
-        catch (NumberFormatException ex)
-        {
-            throw new NucleusException("Cant create cache: Bad expireSeconds value:" + expireStr, ex);
         }
     }
 

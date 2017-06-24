@@ -34,7 +34,6 @@ import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.identity.IdentityUtils;
 import org.datanucleus.identity.SingleFieldId;
 import org.datanucleus.util.NucleusLogger;
-import org.datanucleus.util.StringUtils;
 
 /**
  * Plugin using Xmemcached implementation of "memcached" as a Level2 cache.
@@ -65,11 +64,7 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
             throw new NucleusException("Cant create cache", e);
         }
 
-        String expireStr = conf.getStringProperty("datanucleus.cache.level2.memcached.expireSeconds");
-        if (!StringUtils.isWhitespace(expireStr))
-        {
-            expireSeconds = Integer.parseInt(expireStr);
-        }
+        expireSeconds = (int)expiryMillis/1000;
     }
 
     public void close()
