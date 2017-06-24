@@ -42,6 +42,8 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
 {
     private static final long serialVersionUID = -5116427607754733694L;
 
+    public static final String PROPERTY_CACHE_L2_MEMCACHED_SERVERS = "datanucleus.cache.level2.memcached.servers";
+
     private MemcachedClient client;
 
     private int expireSeconds = 0;
@@ -52,7 +54,7 @@ public class XmemcachedLevel2Cache extends AbstractLevel2Cache
 
         Configuration conf = nucleusCtx.getConfiguration();
 
-        String servers = conf.getStringProperty("datanucleus.cache.level2.memcached.servers");
+        String servers = conf.getStringProperty(PROPERTY_CACHE_L2_MEMCACHED_SERVERS);
         MemcachedClientBuilder builder = new XMemcachedClientBuilder(AddrUtil.getAddresses(servers));
         try
         {

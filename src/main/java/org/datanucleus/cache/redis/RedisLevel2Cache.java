@@ -51,6 +51,12 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
 {
     private static final long serialVersionUID = 4428364640009394044L;
 
+    public static final String PROPERTY_CACHE_L2_REDIS_DATABASE = "datanucleus.cache.level2.redis.database";
+    public static final String PROPERTY_CACHE_L2_REDIS_TIMEOUT = "datanucleus.cache.level2.redis.timeout";
+    public static final String PROPERTY_CACHE_L2_REDIS_SENTINELS = "datanucleus.cache.level2.redis.sentinels";
+    public static final String PROPERTY_CACHE_L2_REDIS_SERVER = "datanucleus.cache.level2.redis.server";
+    public static final String PROPERTY_CACHE_L2_REDIS_PORT = "datanucleus.cache.level2.redis.port";
+
     private Pool<Jedis> pool;
 
     private int expirySeconds;
@@ -66,15 +72,15 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
 
         Configuration conf = nucleusCtx.getConfiguration();
 
-        int database = conf.getIntProperty("datanucleus.cache.level2.redis.database");
+        int database = conf.getIntProperty(PROPERTY_CACHE_L2_REDIS_DATABASE);
         database = database == 0 ? DEFAULT_DATABASE : database;
 
-        int timeout = conf.getIntProperty("datanucleus.cache.level2.redis.timeout");
+        int timeout = conf.getIntProperty(PROPERTY_CACHE_L2_REDIS_TIMEOUT);
         timeout = timeout == 0 ? DEFAULT_TIMEOUT : timeout;
 
         expirySeconds = (int) (expiryMillis/1000);
 
-        String sentinelsStr = conf.getStringProperty("datanucleus.cache.level2.redis.sentinels");
+        String sentinelsStr = conf.getStringProperty(PROPERTY_CACHE_L2_REDIS_SENTINELS);
         if (sentinelsStr != null && sentinelsStr.length() > 0)
         {
             Set<String> sentinels = new LinkedHashSet<>();
@@ -83,8 +89,8 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
         }
         else
         {
-            String server = conf.getStringProperty("datanucleus.cache.level2.redis.server");
-            int port = conf.getIntProperty("datanucleus.cache.level2.redis.port");
+            String server = conf.getStringProperty(PROPERTY_CACHE_L2_REDIS_SERVER);
+            int port = conf.getIntProperty(PROPERTY_CACHE_L2_REDIS_PORT);
 
             server = server == null ? DEFAULT_SERVER : server;
             port = port == 0 ? DEFAULT_PORT : port;

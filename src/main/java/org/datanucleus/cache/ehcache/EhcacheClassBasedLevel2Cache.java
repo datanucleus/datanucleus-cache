@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.datanucleus.NucleusContext;
+import org.datanucleus.PropertyNames;
 import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
@@ -67,7 +68,7 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
         super(nucleusCtx);
 
         Configuration conf = nucleusCtx.getConfiguration();
-        String configFile = conf.getStringProperty("datanucleus.cache.level2.configurationFile");
+        String configFile = conf.getStringProperty(PropertyNames.PROPERTY_CACHE_L2_CONFIG_FILE);
         try
         {
             if (configFile == null)

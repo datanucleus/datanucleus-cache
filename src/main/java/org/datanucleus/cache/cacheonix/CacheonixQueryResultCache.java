@@ -51,15 +51,10 @@ public class CacheonixQueryResultCache implements QueryResultsCache
     public CacheonixQueryResultCache(NucleusContext nucleusCtx)
     {
         Configuration conf = nucleusCtx.getConfiguration();
-        String configFile = conf.getStringProperty("datanucleus.cache.level2.configurationFile");
-        if (configFile == null)
-        {
-            cacheManager = Cacheonix.getInstance();
-        }
-        else
-        {
-            cacheManager = Cacheonix.getInstance(configFile);
-        }
+
+        String configFile = conf.getStringProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_CONFIG_FILE);
+
+        cacheManager = (configFile == null) ? Cacheonix.getInstance() : Cacheonix.getInstance(configFile);
 
         if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS))
         {

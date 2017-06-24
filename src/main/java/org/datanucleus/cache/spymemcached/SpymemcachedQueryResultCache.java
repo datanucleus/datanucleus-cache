@@ -26,6 +26,7 @@ import net.spy.memcached.MemcachedClient;
 
 import org.datanucleus.NucleusContext;
 import org.datanucleus.PropertyNames;
+import org.datanucleus.cache.xmemcached.XmemcachedQueryResultCache;
 import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
@@ -51,13 +52,11 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
     {
         Configuration conf = nucleusCtx.getConfiguration();
 
-        String keyPrefix = conf.getStringProperty("datanucleus.cache.query.memcached.keyprefix");
+        String keyPrefix = conf.getStringProperty(XmemcachedQueryResultCache.PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_KEYPREFIX);
         if (keyPrefix != null)
         {
             this.keyPrefix = keyPrefix;
         }
-
-        String servers = conf.getStringProperty("datanucleus.cache.query.memcached.servers");
 
         if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS))
         {
@@ -65,6 +64,7 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
             expireSeconds = (int)expireMillis/1000;
         }
 
+        String servers = conf.getStringProperty(XmemcachedQueryResultCache.PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_SERVERS);
         try
         {
             client = new MemcachedClient(AddrUtil.getAddresses(servers));

@@ -42,6 +42,9 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
 {
     private static final long serialVersionUID = 8865474095320516082L;
 
+    public static final String PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_SERVERS = "datanucleus.cache.queryResults.memcached.servers";
+    public static final String PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_KEYPREFIX = "datanucleus.cache.queryResults.memcached.keyprefix";
+
     private MemcachedClient client;
 
     /** Prefix (for uniqueness) to ensure sharing with other xmemcached objects. */
@@ -53,7 +56,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
     {
         Configuration conf = nucleusCtx.getConfiguration();
 
-        String keyPrefix = conf.getStringProperty("datanucleus.cache.query.memcached.keyprefix");
+        String keyPrefix = conf.getStringProperty(PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_KEYPREFIX);
         if (keyPrefix != null)
         {
             this.keyPrefix = keyPrefix;
@@ -65,10 +68,10 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
             expireSeconds = (int)expireMillis/1000;
         }
 
-        String servers = conf.getStringProperty("datanucleus.cache.level2.memcached.servers");
-        MemcachedClientBuilder builder = new XMemcachedClientBuilder(AddrUtil.getAddresses(servers));
+        String servers = conf.getStringProperty(PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_SERVERS);
         try
         {
+            MemcachedClientBuilder builder = new XMemcachedClientBuilder(AddrUtil.getAddresses(servers));
             client = builder.build();
         }
         catch (IOException e)

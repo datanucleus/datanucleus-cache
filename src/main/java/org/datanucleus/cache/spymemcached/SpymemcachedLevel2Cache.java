@@ -29,6 +29,7 @@ import org.datanucleus.NucleusContext;
 import org.datanucleus.Configuration;
 import org.datanucleus.cache.AbstractLevel2Cache;
 import org.datanucleus.cache.CachedPC;
+import org.datanucleus.cache.xmemcached.XmemcachedLevel2Cache;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.identity.IdentityUtils;
 import org.datanucleus.identity.SingleFieldId;
@@ -56,7 +57,7 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
 
         try
         {
-            String servers = conf.getStringProperty("datanucleus.cache.level2.memcached.servers");
+            String servers = conf.getStringProperty(XmemcachedLevel2Cache.PROPERTY_CACHE_L2_MEMCACHED_SERVERS);
             client = new MemcachedClient(AddrUtil.getAddresses(servers));
         }
         catch (IOException e)
