@@ -42,7 +42,7 @@ public class CacheonixQueryResultCache implements QueryResultsCache
     Cacheonix cacheManager;
 
     /** User-provided timeout for cache object expiration (milliseconds). */
-    long timeout = -1;
+    long expiryMillis = -1;
 
     /** Fallback class when we can't derive the class name from the identity (composite id). */
     Cache<Serializable, Serializable> queryCache;
@@ -60,9 +60,9 @@ public class CacheonixQueryResultCache implements QueryResultsCache
             cacheManager = Cacheonix.getInstance(configFile);
         }
 
-        if (conf.hasProperty("datanucleus.cache.level2.timeout"))
+        if (conf.hasProperty("datanucleus.cache.level2.expiryMillis"))
         {
-            timeout = conf.getIntProperty("datanucleus.cache.level2.timeout");
+            expiryMillis = conf.getIntProperty("datanucleus.cache.level2.expiryMillis");
         }
 
         String cacheName = conf.getStringProperty("datanucleus.cache.queryResults.cacheName");
@@ -127,9 +127,9 @@ public class CacheonixQueryResultCache implements QueryResultsCache
             return null;
         }
 
-        if (timeout > 0)
+        if (expiryMillis > 0)
         {
-            queryCache.put(queryKey, (Serializable)results, timeout);
+            queryCache.put(queryKey, (Serializable)results, expiryMillis);
         }
         else
         {
