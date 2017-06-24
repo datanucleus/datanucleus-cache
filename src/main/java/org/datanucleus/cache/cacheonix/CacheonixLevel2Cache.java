@@ -45,7 +45,7 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
     Cacheonix cacheManager;
 
     /** Map of cache keyed by the class name (one cache per class). */
-    final Map<String, Cache> caches = new HashMap();
+    final Map<String, Cache> caches = new HashMap<>();
 
     /** Fallback class when we can't derive the class name from the identity (composite id). */
     Cache<Serializable, Serializable> defaultCache;

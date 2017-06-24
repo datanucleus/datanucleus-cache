@@ -88,17 +88,17 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
         return get(oid) != null;
     }
 
-    public synchronized void evict(Object oid)
+    public void evict(Object oid)
     {
         client.delete(getCacheKeyForId(oid));
     }
 
-    public synchronized void evictAll()
+    public void evictAll()
     {
         client.flush();
     }
 
-    public synchronized void evictAll(Object[] oids)
+    public void evictAll(Object[] oids)
     {
         if (oids == null)
         {
@@ -111,7 +111,7 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
         }
     }
 
-    public synchronized void evictAll(Collection oids)
+    public void evictAll(Collection oids)
     {
         if (oids == null)
         {
@@ -125,9 +125,9 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
         }
     }
 
-    public synchronized void evictAll(Class arg0, boolean arg1)
+    public void evictAll(Class arg0, boolean arg1)
     {
-        throw new UnsupportedOperationException("evictAll(Class,Boolean) method not supported by spymemcached plugin");
+        // Not supported. Do nothing
     }
 
     public CachedPC get(Object oid)
@@ -135,17 +135,7 @@ public class SpymemcachedLevel2Cache extends AbstractLevel2Cache
         return (CachedPC) client.get(getCacheKeyForId(oid));
     }
 
-    public int getSize()
-    {
-        throw new UnsupportedOperationException("getSize() method not supported by spymemcached plugin");
-    }
-
-    public boolean isEmpty()
-    {
-        throw new UnsupportedOperationException("isEmpty() method not supported by spymemcached plugin");
-    }
-
-    public synchronized CachedPC put(Object oid, CachedPC pc)
+    public CachedPC put(Object oid, CachedPC pc)
     {
         if (oid == null || pc == null)
         {

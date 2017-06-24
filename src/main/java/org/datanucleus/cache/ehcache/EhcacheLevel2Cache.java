@@ -201,27 +201,6 @@ public class EhcacheLevel2Cache extends AbstractLevel2Cache
     }
 
     /**
-     * Accessor for whether the cache is empty
-     * @see org.datanucleus.cache.Level2Cache#isEmpty()
-     */
-    public boolean isEmpty()
-    {
-        try
-        {
-            return cache.getSize() == 0;
-        }
-        catch (IllegalStateException e)
-        {
-            NucleusLogger.CACHE.warn("Error invoking Cache.isEmpty : " + e.getMessage());
-        }
-        catch (CacheException e)
-        {
-            NucleusLogger.CACHE.warn("Error invoking Cache.isEmpty : " + e.getMessage());
-        }
-        return true;
-    }
-
-    /**
      * Method to add an object to the cache under its id
      * @param oid The identity
      * @param pc The cacheable object

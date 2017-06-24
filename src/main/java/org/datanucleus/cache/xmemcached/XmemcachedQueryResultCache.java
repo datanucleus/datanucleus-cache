@@ -112,7 +112,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
     /* (non-Javadoc)
      * @see org.datanucleus.store.query.cache.QueryResultsCache#evict(org.datanucleus.store.query.Query)
      */
-    public synchronized void evict(Query query)
+    public void evict(Query query)
     {
         try
         {
@@ -128,7 +128,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
     /* (non-Javadoc)
      * @see org.datanucleus.store.query.cache.QueryResultsCache#evict(org.datanucleus.store.query.Query, java.util.Map)
      */
-    public synchronized void evict(Query query, Map params)
+    public void evict(Query query, Map params)
     {
         try
         {
@@ -143,7 +143,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
     /* (non-Javadoc)
      * @see org.datanucleus.store.query.cache.QueryResultsCache#evictAll()
      */
-    public synchronized void evictAll()
+    public void evictAll()
     {
         try
         {
@@ -153,38 +153,6 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
         {
             throw new NucleusException("Exception evicting entries from xmemcached", e);
         }
-    }
-
-    /* (non-Javadoc)
-     * @see org.datanucleus.store.query.cache.QueryResultsCache#pin(org.datanucleus.store.query.Query, java.util.Map)
-     */
-    public void pin(Query query, Map params)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
-    }
-
-    /* (non-Javadoc)
-     * @see org.datanucleus.store.query.cache.QueryResultsCache#pin(org.datanucleus.store.query.Query)
-     */
-    public void pin(Query query)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
-    }
-
-    /* (non-Javadoc)
-     * @see org.datanucleus.store.query.cache.QueryResultsCache#unpin(org.datanucleus.store.query.Query, java.util.Map)
-     */
-    public void unpin(Query query, Map params)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
-    }
-
-    /* (non-Javadoc)
-     * @see org.datanucleus.store.query.cache.QueryResultsCache#unpin(org.datanucleus.store.query.Query)
-     */
-    public void unpin(Query query)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
     }
 
     /* (non-Javadoc)
@@ -203,17 +171,9 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
     }
 
     /* (non-Javadoc)
-     * @see org.datanucleus.store.query.cache.QueryResultsCache#isEmpty()
-     */
-    public boolean isEmpty()
-    {
-        throw new UnsupportedOperationException("isEmpty() method not supported by spymemcached plugin");
-    }
-
-    /* (non-Javadoc)
      * @see org.datanucleus.store.query.cache.QueryResultsCache#put(java.lang.String, java.util.List)
      */
-    public synchronized List<Object> put(String queryKey, List<Object> results)
+    public List<Object> put(String queryKey, List<Object> results)
     {
         if (queryKey == null || results == null)
         {
@@ -230,13 +190,5 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
         }
 
         return results;
-    }
-
-    /* (non-Javadoc)
-     * @see org.datanucleus.store.query.cache.QueryResultsCache#size()
-     */
-    public int size()
-    {
-        throw new UnsupportedOperationException("size() method not supported by spymemcached plugin");
     }
 }

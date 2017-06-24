@@ -29,13 +29,12 @@ import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 
 /**
  * Simple implementation of a plugin for use of OSCache caching product with DataNucleus. 
- * Please refer to <a href="http://www.opensymphony.com/oscache/">OpenSymphony OSCache</a>
- * for full details of their product.
+ * Please refer to <a href="http://www.opensymphony.com/oscache/">OpenSymphony OSCache</a> for full details of their product.
  */
 public class OSCacheLevel2Cache extends AbstractLevel2Cache
 {
     private static final long serialVersionUID = -2975118169574839235L;
-    /** The cache manager */
+
     private final GeneralCacheAdministrator cache;
 
     /**
@@ -89,15 +88,6 @@ public class OSCacheLevel2Cache extends AbstractLevel2Cache
     }
 
     /**
-     * Accessor for the size of the cache.
-     * @see org.datanucleus.cache.Level2Cache#getSize()
-     */
-    public int getSize()
-    {
-        throw new UnsupportedOperationException("getSize() method not yet supported by OSCache plugin");
-    }
-
-    /**
      * Method to add an object to the cache under its id
      * @param oid The identity
      * @param pc The cacheable object
@@ -145,7 +135,7 @@ public class OSCacheLevel2Cache extends AbstractLevel2Cache
      */
     public void evictAll(Class pcClass, boolean subclasses)
     {
-        throw new UnsupportedOperationException("evict(Class, boolean) method not yet supported by OSCache plugin");
+        // Not supported. Do nothing
     }
 
     /**

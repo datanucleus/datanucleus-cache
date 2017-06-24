@@ -42,7 +42,7 @@ import com.tangosol.net.NamedCache;
 public class CoherenceLevel2Cache extends AbstractLevel2Cache
 {
     private static final long serialVersionUID = -8366039798215561285L;
-    /** The Coherence cache */
+
     private NamedCache cache;
 
     /**
@@ -206,7 +206,7 @@ public class CoherenceLevel2Cache extends AbstractLevel2Cache
      */
     public void evictAll(Class pcClass, boolean subclasses)
     {
-        throw new UnsupportedOperationException("evict(Class, boolean) method not yet supported by Coherence plugin");
+        // Not supported. Do nothing
     }
 
     /**

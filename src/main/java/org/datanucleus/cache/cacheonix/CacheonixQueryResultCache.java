@@ -82,7 +82,7 @@ public class CacheonixQueryResultCache implements QueryResultsCache
 
     public void evict(Class candidate)
     {
-        throw new UnsupportedOperationException("Not yet supported");
+        // Not supported. Do nothing. TODO Support this
     }
 
     public void evict(Query query)
@@ -108,31 +108,6 @@ public class CacheonixQueryResultCache implements QueryResultsCache
     public void evictAll()
     {
         queryCache.clear();
-    }
-
-    public void pin(Query query)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
-    }
-
-    public void pin(Query query, Map params)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
-    }
-
-    public void unpin(Query query)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
-    }
-
-    public void unpin(Query query, Map params)
-    {
-        throw new UnsupportedOperationException("This cache doesn't support pinning/unpinning");
-    }
-
-    public boolean isEmpty()
-    {
-        return size() == 0;
     }
 
     public int size()

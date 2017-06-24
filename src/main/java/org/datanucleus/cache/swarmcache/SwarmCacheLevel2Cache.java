@@ -30,13 +30,12 @@ import net.sf.swarmcache.ObjectCache;
 
 /**
  * Simple implementation of a plugin for use of SwarmCache caching product with DataNucleus. 
- * Please refer to <a href="http://www.sf.net/projects/swarmcache/">SwarmCache</a> for full details 
- * of their product.
+ * Please refer to <a href="http://www.sf.net/projects/swarmcache/">SwarmCache</a> for full details of their product.
  */
 public class SwarmCacheLevel2Cache extends AbstractLevel2Cache
 {
     private static final long serialVersionUID = -8430359936229487099L;
-    /** The cache to use. */
+
     private final ObjectCache cache;
 
     /**
@@ -82,24 +81,6 @@ public class SwarmCacheLevel2Cache extends AbstractLevel2Cache
             return (CachedPC)cache.get((Serializable)oid);
         }
         throw new UnsupportedOperationException("SwarmCache doesnt support use of keys that aren't Serializable");
-    }
-
-    /**
-     * Accessor for the size of the cache.
-     * @see org.datanucleus.cache.Level2Cache#getSize()
-     */
-    public int getSize()
-    {
-        throw new UnsupportedOperationException("getSize() method not yet supported by SwarmCache plugin");
-    }
-
-    /**
-     * Accessor for whether the cache is empty
-     * @see org.datanucleus.cache.Level2Cache#isEmpty()
-     */
-    public boolean isEmpty()
-    {
-        return getSize() == 0;
     }
 
     /**
@@ -158,7 +139,7 @@ public class SwarmCacheLevel2Cache extends AbstractLevel2Cache
      */
     public void evictAll(Class pcClass, boolean subclasses)
     {
-        throw new UnsupportedOperationException("evict(Class, boolean) method not yet supported by SwarmCache plugin");
+        // Not supported. Do nothing
     }
 
     /**
