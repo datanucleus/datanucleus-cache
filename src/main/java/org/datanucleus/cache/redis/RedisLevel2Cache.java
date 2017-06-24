@@ -59,7 +59,6 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
     private final static int DEFAULT_DATABASE = 1;
     private final static int DEFAULT_PORT = 6379;
     private final static int DEFAULT_TIMEOUT = 5000;
-    private final static int DEFAULT_EXPIRY = 86400;
 
     public RedisLevel2Cache(NucleusContext nucleusCtx)
     {
@@ -73,8 +72,7 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
         int timeout = conf.getIntProperty("datanucleus.cache.level2.redis.timeout");
         timeout = timeout == 0 ? DEFAULT_TIMEOUT : timeout;
 
-        expirySeconds = conf.getIntProperty("datanucleus.cache.level2.redis.expirySeconds");
-        expirySeconds = expirySeconds == 0 ? DEFAULT_EXPIRY : expirySeconds;
+        expirySeconds = (int) (expiryMillis/1000);
 
         String sentinelsStr = conf.getStringProperty("datanucleus.cache.level2.redis.sentinels");
         if (sentinelsStr != null && sentinelsStr.length() > 0)

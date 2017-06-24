@@ -238,9 +238,9 @@ public class CacheonixLevel2Cache extends AbstractLevel2Cache
 
         try
         {
-            if (timeout > 0)
+            if (expiryMillis > 0)
             {
-                getCacheForId(oid).put((Serializable) oid, pc, timeout);
+                getCacheForId(oid).put((Serializable) oid, pc, expiryMillis);
             }
             else
             {

@@ -27,7 +27,6 @@
 
         <persistence-property name="datanucleus.cache.level2.redis.database"/>
         <persistence-property name="datanucleus.cache.level2.redis.timeout"/>
-        <persistence-property name="datanucleus.cache.level2.redis.expirySeconds"/>
         <persistence-property name="datanucleus.cache.level2.redis.sentinels"/>
         <persistence-property name="datanucleus.cache.level2.redis.server"/>
         <persistence-property name="datanucleus.cache.level2.redis.port"/>
