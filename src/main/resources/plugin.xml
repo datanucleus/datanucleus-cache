@@ -15,12 +15,11 @@
         <cache name="cacheonix" class-name="org.datanucleus.cache.cacheonix.CacheonixQueryResultCache"/>
         <cache name="spymemcached" class-name="org.datanucleus.cache.spymemcached.SpymemcachedQueryResultCache"/>
         <cache name="xmemcached" class-name="org.datanucleus.cache.xmemcached.XmemcachedQueryResultCache"/>
+        <cache name="redis" class-name="org.datanucleus.cache.redis.RedisQueryResultCache"/>
     </extension>
 
     <!-- PERSISTENCE PROPERTIES -->
     <extension point="org.datanucleus.persistence_properties">
-        <persistence-property name="datanucleus.cache.level2.configurationFile"/>
-
         <persistence-property name="datanucleus.cache.level2.memcached.servers"/>
         <persistence-property name="datanucleus.cache.level2.memcached.keyprefix"/>
 
