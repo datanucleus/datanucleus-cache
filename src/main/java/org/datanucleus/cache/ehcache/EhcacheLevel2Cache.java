@@ -35,12 +35,10 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
-import net.sf.ehcache.ObjectExistsException;
 
 /**
  * Simple implementation of a plugin for use of Ehcache caching product with DataNucleus.
- * Please refer to <a href="http://ehcache.sourceforge.net">ehcache.sourceforge.net</a>
- * for full details of their product. 
+ * Please refer to <a href="http://ehcache.sourceforge.net">ehcache.sourceforge.net</a> for full details of their product. 
  */
 public class EhcacheLevel2Cache extends AbstractLevel2Cache
 {
@@ -84,17 +82,7 @@ public class EhcacheLevel2Cache extends AbstractLevel2Cache
             {
                 cacheManager.addCache(cacheName);
             }
-            catch (IllegalStateException e)
-            {
-                NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
-                throw new NucleusException("Cant create cache", e);
-            }
-            catch (ObjectExistsException e)
-            {
-                NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
-                throw new NucleusException("Cant create cache", e);
-            }
-            catch (CacheException e)
+            catch (IllegalStateException | CacheException e)
             {
                 NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
                 throw new NucleusException("Cant create cache", e);

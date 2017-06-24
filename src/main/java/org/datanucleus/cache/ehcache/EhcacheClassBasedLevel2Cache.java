@@ -38,7 +38,6 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
-import net.sf.ehcache.ObjectExistsException;
 
 /**
  * Plugin for EHCache that allows the user to use different caches for different classes.
@@ -91,17 +90,7 @@ public class EhcacheClassBasedLevel2Cache extends AbstractLevel2Cache
             {
                 cacheManager.addCache(cacheName);
             }
-            catch (IllegalStateException e)
-            {
-                NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
-                throw new NucleusException(Localiser.msg("Cache.EHCache.CreateDefaultFails", e));
-            }
-            catch (ObjectExistsException e)
-            {
-                NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
-                throw new NucleusException(Localiser.msg("Cache.EHCache.CreateDefaultFails", e));
-            }
-            catch (CacheException e)
+            catch (IllegalStateException | CacheException e)
             {
                 NucleusLogger.CACHE.warn("Error creating Cache : " + e.getMessage());
                 throw new NucleusException(Localiser.msg("Cache.EHCache.CreateDefaultFails", e));

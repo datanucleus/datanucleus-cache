@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.datanucleus.NucleusContext;
+import org.datanucleus.PropertyNames;
 import org.datanucleus.Configuration;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
@@ -60,15 +61,15 @@ public class CacheonixQueryResultCache implements QueryResultsCache
             cacheManager = Cacheonix.getInstance(configFile);
         }
 
-        if (conf.hasProperty("datanucleus.cache.level2.expiryMillis"))
+        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS))
         {
-            expiryMillis = conf.getIntProperty("datanucleus.cache.level2.expiryMillis");
+            expiryMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS);
         }
 
-        String cacheName = conf.getStringProperty("datanucleus.cache.queryResults.cacheName");
+        String cacheName = conf.getStringProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_NAME);
         if (cacheName == null)
         {
-            NucleusLogger.CACHE.warn("No 'datanucleus.cache.queryResults.cacheName' specified so using name of 'DataNucleus-Query'");
+            NucleusLogger.CACHE.warn("No property " + PropertyNames.PROPERTY_CACHE_QUERYRESULTS_NAME + " specified so using name of 'DataNucleus-Query'");
             cacheName = "datanucleus-query";
         }
         queryCache = cacheManager.getCache(cacheName);

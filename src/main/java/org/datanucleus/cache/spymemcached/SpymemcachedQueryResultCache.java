@@ -25,6 +25,7 @@ import net.spy.memcached.AddrUtil;
 import net.spy.memcached.MemcachedClient;
 
 import org.datanucleus.NucleusContext;
+import org.datanucleus.PropertyNames;
 import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
@@ -49,30 +50,29 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
     public SpymemcachedQueryResultCache(NucleusContext nucleusCtx)
     {
         Configuration conf = nucleusCtx.getConfiguration();
+
         String keyPrefix = conf.getStringProperty("datanucleus.cache.query.memcached.keyprefix");
-        String servers = conf.getStringProperty("datanucleus.cache.query.memcached.servers");
-        String expireStr = conf.getStringProperty("datanucleus.cache.query.memcached.expireSeconds");
         if (keyPrefix != null)
         {
             this.keyPrefix = keyPrefix;
         }
 
+        String servers = conf.getStringProperty("datanucleus.cache.query.memcached.servers");
+
+        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS))
+        {
+            long expireMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS);
+            expireSeconds = (int)expireMillis/1000;
+        }
+
         try
         {
             client = new MemcachedClient(AddrUtil.getAddresses(servers));
-            if (expireStr != null && !"".equals(expireStr))
-            {
-                expireSeconds = Integer.parseInt(expireStr);
-            }
         }
         catch (IOException e)
         {
             NucleusLogger.CACHE.error("Exception caught creating cache", e);
             throw new NucleusException("Cant create cache", e);
-        }
-        catch (NumberFormatException ex)
-        {
-            throw new NucleusException("Cant create cache: Bad expireSeconds value:" + expireStr, ex);
         }
     }
 

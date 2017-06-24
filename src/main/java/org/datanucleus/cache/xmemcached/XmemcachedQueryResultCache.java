@@ -27,13 +27,13 @@ import net.rubyeye.xmemcached.XMemcachedClientBuilder;
 import net.rubyeye.xmemcached.utils.AddrUtil;
 
 import org.datanucleus.NucleusContext;
+import org.datanucleus.PropertyNames;
 import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
 import org.datanucleus.store.query.cache.QueryResultsCache;
 import org.datanucleus.util.NucleusLogger;
-import org.datanucleus.util.StringUtils;
 
 /**
  * Plugin using xmemcached implementation of "memcached" as a query results cache.
@@ -52,10 +52,17 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
     public XmemcachedQueryResultCache(NucleusContext nucleusCtx)
     {
         Configuration conf = nucleusCtx.getConfiguration();
+
         String keyPrefix = conf.getStringProperty("datanucleus.cache.query.memcached.keyprefix");
         if (keyPrefix != null)
         {
             this.keyPrefix = keyPrefix;
+        }
+
+        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS))
+        {
+            long expireMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS);
+            expireSeconds = (int)expireMillis/1000;
         }
 
         String servers = conf.getStringProperty("datanucleus.cache.level2.memcached.servers");
@@ -68,12 +75,6 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
         {
             NucleusLogger.CACHE.error("Exception caught creating cache", e);
             throw new NucleusException("Cant create cache", e);
-        }
-
-        String expireStr = conf.getStringProperty("datanucleus.cache.query.memcached.expireSeconds");
-        if (!StringUtils.isWhitespace(expireStr))
-        {
-            expireSeconds = Integer.parseInt(expireStr);
         }
     }
 
