@@ -61,9 +61,9 @@ public class CacheonixQueryResultCache implements QueryResultsCache
             cacheManager = Cacheonix.getInstance(configFile);
         }
 
-        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS))
+        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS))
         {
-            expiryMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS);
+            expiryMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS);
         }
 
         String cacheName = conf.getStringProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_NAME);

@@ -59,9 +59,9 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
 
         String servers = conf.getStringProperty("datanucleus.cache.query.memcached.servers");
 
-        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS))
+        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS))
         {
-            long expireMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRE_MILLIS);
+            long expireMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS);
             expireSeconds = (int)expireMillis/1000;
         }
 
