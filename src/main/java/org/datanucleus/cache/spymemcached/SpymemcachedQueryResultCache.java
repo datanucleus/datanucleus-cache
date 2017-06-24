@@ -25,19 +25,18 @@ import net.spy.memcached.AddrUtil;
 import net.spy.memcached.MemcachedClient;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PropertyNames;
 import org.datanucleus.cache.xmemcached.XmemcachedQueryResultCache;
 import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
-import org.datanucleus.store.query.cache.QueryResultsCache;
+import org.datanucleus.store.query.cache.AbstractQueryResultsCache;
 import org.datanucleus.util.NucleusLogger;
 
 /**
  * Plugin using spymemcached implementation of "memcached" as a query results cache.
  */
-public class SpymemcachedQueryResultCache implements QueryResultsCache
+public class SpymemcachedQueryResultCache extends AbstractQueryResultsCache
 {
     private static final long serialVersionUID = 4242859249224130913L;
 
@@ -46,10 +45,12 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
     /** Prefix (for uniqueness) to ensure sharing with other memcache objects. */
     private String keyPrefix = "datanucleus-query:";
 
-    private int expireSeconds = 0;
+    private int expirySeconds = 0;
 
     public SpymemcachedQueryResultCache(NucleusContext nucleusCtx)
     {
+        super(nucleusCtx);
+
         Configuration conf = nucleusCtx.getConfiguration();
 
         String keyPrefix = conf.getStringProperty(XmemcachedQueryResultCache.PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_KEYPREFIX);
@@ -58,11 +59,7 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
             this.keyPrefix = keyPrefix;
         }
 
-        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS))
-        {
-            long expireMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS);
-            expireSeconds = (int)expireMillis/1000;
-        }
+        expirySeconds = (int)expiryMillis/1000;
 
         String servers = conf.getStringProperty(XmemcachedQueryResultCache.PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_SERVERS);
         try
@@ -145,7 +142,7 @@ public class SpymemcachedQueryResultCache implements QueryResultsCache
             return null;
         }
 
-        client.set(keyPrefix + queryKey, expireSeconds, results);
+        client.set(keyPrefix + queryKey, expirySeconds, results);
 
         return results;
     }

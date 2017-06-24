@@ -27,18 +27,17 @@ import net.rubyeye.xmemcached.XMemcachedClientBuilder;
 import net.rubyeye.xmemcached.utils.AddrUtil;
 
 import org.datanucleus.NucleusContext;
-import org.datanucleus.PropertyNames;
 import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
-import org.datanucleus.store.query.cache.QueryResultsCache;
+import org.datanucleus.store.query.cache.AbstractQueryResultsCache;
 import org.datanucleus.util.NucleusLogger;
 
 /**
  * Plugin using xmemcached implementation of "memcached" as a query results cache.
  */
-public class XmemcachedQueryResultCache implements QueryResultsCache
+public class XmemcachedQueryResultCache extends AbstractQueryResultsCache
 {
     private static final long serialVersionUID = 8865474095320516082L;
 
@@ -50,10 +49,12 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
     /** Prefix (for uniqueness) to ensure sharing with other xmemcached objects. */
     private String keyPrefix = "datanucleus-query:";
 
-    private int expireSeconds = 0;
+    private int expirySeconds = 0;
 
     public XmemcachedQueryResultCache(NucleusContext nucleusCtx)
     {
+        super(nucleusCtx);
+
         Configuration conf = nucleusCtx.getConfiguration();
 
         String keyPrefix = conf.getStringProperty(PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_KEYPREFIX);
@@ -62,11 +63,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
             this.keyPrefix = keyPrefix;
         }
 
-        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS))
-        {
-            long expireMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS);
-            expireSeconds = (int)expireMillis/1000;
-        }
+        expirySeconds = (int)expiryMillis/1000;
 
         String servers = conf.getStringProperty(PROPERTY_CACHE_QUERYRESULTS_MEMCACHED_SERVERS);
         try
@@ -186,7 +183,7 @@ public class XmemcachedQueryResultCache implements QueryResultsCache
 
         try
         {
-            client.set(keyPrefix + queryKey, expireSeconds, results);
+            client.set(keyPrefix + queryKey, expirySeconds, results);
         }
         catch (Exception e)
         {

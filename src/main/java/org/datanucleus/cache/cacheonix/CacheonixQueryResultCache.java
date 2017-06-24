@@ -27,8 +27,7 @@ import org.datanucleus.PropertyNames;
 import org.datanucleus.Configuration;
 import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
-import org.datanucleus.store.query.cache.QueryResultsCache;
-import org.datanucleus.util.NucleusLogger;
+import org.datanucleus.store.query.cache.AbstractQueryResultsCache;
 
 import cacheonix.Cacheonix;
 import cacheonix.cache.Cache;
@@ -36,37 +35,25 @@ import cacheonix.cache.Cache;
 /**
  * Implementation of a query results cache using Cacheonix.
  */
-public class CacheonixQueryResultCache implements QueryResultsCache
+public class CacheonixQueryResultCache extends AbstractQueryResultsCache
 {
     private static final long serialVersionUID = -7951373996155521704L;
 
     Cacheonix cacheManager;
-
-    /** User-provided timeout for cache object expiration (milliseconds). */
-    long expiryMillis = -1;
 
     /** Fallback class when we can't derive the class name from the identity (composite id). */
     Cache<Serializable, Serializable> queryCache;
 
     public CacheonixQueryResultCache(NucleusContext nucleusCtx)
     {
+        super(nucleusCtx);
+
         Configuration conf = nucleusCtx.getConfiguration();
 
         String configFile = conf.getStringProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_CONFIG_FILE);
 
         cacheManager = (configFile == null) ? Cacheonix.getInstance() : Cacheonix.getInstance(configFile);
 
-        if (conf.hasPropertyNotNull(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS))
-        {
-            expiryMillis = conf.getIntProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_EXPIRY_MILLIS);
-        }
-
-        String cacheName = conf.getStringProperty(PropertyNames.PROPERTY_CACHE_QUERYRESULTS_NAME);
-        if (cacheName == null)
-        {
-            NucleusLogger.CACHE.warn("No property " + PropertyNames.PROPERTY_CACHE_QUERYRESULTS_NAME + " specified so using name of 'DataNucleus-Query'");
-            cacheName = "datanucleus-query";
-        }
         queryCache = cacheManager.getCache(cacheName);
     }
 
