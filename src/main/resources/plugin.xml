@@ -4,7 +4,6 @@
         <cache name="EHCache" class-name="org.datanucleus.cache.ehcache.EhcacheLevel2Cache"/>
         <cache name="EHCacheClassBased" class-name="org.datanucleus.cache.ehcache.EhcacheClassBasedLevel2Cache"/>
         <cache name="OSCache" class-name="org.datanucleus.cache.oscache.OSCacheLevel2Cache"/>
-        <cache name="SwarmCache" class-name="org.datanucleus.cache.swarmcache.SwarmCacheLevel2Cache"/>
         <cache name="Coherence" class-name="org.datanucleus.cache.coherence.CoherenceLevel2Cache"/>
         <cache name="spymemcached" class-name="org.datanucleus.cache.spymemcached.SpymemcachedLevel2Cache"/>
         <cache name="xmemcached" class-name="org.datanucleus.cache.xmemcached.XmemcachedLevel2Cache"/>
