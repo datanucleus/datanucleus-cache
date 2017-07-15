@@ -1,7 +1,7 @@
 datanucleus-cache
 =================
 
-DataNucleus support for third-party caching products.
+DataNucleus support for third-party caching products. This includes memcached, EHCache (not javax.cache), Redis, and Cacheonix.
 Note that this plugin is for caching products that do NOT implement the javax.cache standardised API.
 Support for javax.cache API products is included in datanucleus-core.
 
@@ -12,7 +12,7 @@ KeyFacts
 --------
 __License__ : Apache 2 licensed  
 __Issue Tracker__ : http://github.com/datanucleus/datanucleus-cache/issues  
-__Javadocs__ : [5.0](http://www.datanucleus.org/javadocs/cache/5.0/), [4.0](http://www.datanucleus.org/javadocs/cache/4.0/)  
+__Javadocs__ : [5.1](http://www.datanucleus.org/javadocs/cache/5.1/), [5.0](http://www.datanucleus.org/javadocs/cache/5.0/), [4.0](http://www.datanucleus.org/javadocs/cache/4.0/)  
 __Download(Releases)__ : [Maven Central](http://central.maven.org/maven2/org/datanucleus/datanucleus-cache)  
 __Download(Nightly)__ : [Nightly Builds](http://www.datanucleus.org/downloads/maven2-nightly/org/datanucleus/datanucleus-cache)  
 __Dependencies__ : See file [pom.xml](pom.xml)  
