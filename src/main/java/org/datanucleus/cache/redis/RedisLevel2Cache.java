@@ -277,7 +277,7 @@ public class RedisLevel2Cache extends AbstractLevel2Cache
         catch (Exception e)
         {
             pool.returnBrokenResource(jedis);
-            throw new NucleusException(String.format("Failed to set object %s with id %s into Redis cache", cachedPC, o));
+            throw new NucleusException(String.format("Failed to set object %s with id %s into Redis cache", cachedPC, o), e);
         }
 
         return cachedPC;
