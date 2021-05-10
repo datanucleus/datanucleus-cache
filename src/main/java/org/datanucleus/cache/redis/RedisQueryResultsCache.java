@@ -33,8 +33,8 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.datanucleus.Configuration;
 import org.datanucleus.NucleusContext;
 import org.datanucleus.exceptions.NucleusException;
-import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
+import org.datanucleus.store.query.QueryUtils;
 import org.datanucleus.store.query.cache.AbstractQueryResultsCache;
 
 import redis.clients.jedis.Jedis;

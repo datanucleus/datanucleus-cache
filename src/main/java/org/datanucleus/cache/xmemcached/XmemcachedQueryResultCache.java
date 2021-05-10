@@ -29,8 +29,8 @@ import net.rubyeye.xmemcached.utils.AddrUtil;
 import org.datanucleus.NucleusContext;
 import org.datanucleus.Configuration;
 import org.datanucleus.exceptions.NucleusException;
-import org.datanucleus.query.QueryUtils;
 import org.datanucleus.store.query.Query;
+import org.datanucleus.store.query.QueryUtils;
 import org.datanucleus.store.query.cache.AbstractQueryResultsCache;
 import org.datanucleus.util.NucleusLogger;
 
